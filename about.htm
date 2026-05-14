@@ -66,6 +66,9 @@
 
     .navbar{
       position:fixed;
+       display:flex;
+      flex-wrap:wrap;
+      gap:20px;
       top:20px;
       left:50%;
       transform:translateX(-50%);
@@ -75,7 +78,6 @@
       background:rgba(255,255,255,0.7);
       backdrop-filter:blur(20px);
       border-radius:30px;
-      display:flex;
       align-items:center;
       justify-content:space-between;
       z-index:1000;
@@ -521,10 +523,6 @@
 
       .about-left h2{
         font-size:45px;
-      }
-
-      .nav-links{
-        display:none;
       }
 
       .main-image-card img,
