@@ -394,19 +394,59 @@
         font-size:70px;
       }
 
-      .nav-links{
-        display:none;
-      }
+  .navbar{
+    padding:18px 20px;
+    gap:18px;
+  }
+
+  .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:18px;
+  }
     }
 
     @media(max-width:768px){
-      .navbar{
-        padding:16px 20px;
-      }
+     @media(max-width:768px){
 
-      .logo h1{
-        font-size:28px;
-      }
+  .navbar{
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    padding:20px;
+  }
+
+  .logo h1{
+    font-size:28px;
+  }
+
+  .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+  }
+
+  .nav-links a{
+    font-size:14px;
+  }
+
+  .nav-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    width:100%;
+  }
+
+  .cart-btn,
+  .shop-btn{
+    padding:12px 18px;
+    font-size:14px;
+  }
+
+}
 
       .hero-left h1{
         font-size:52px;
@@ -433,6 +473,7 @@
         display:none;
       }
     }
+    
     /* MAP + REVIEW SECTION */
 
 .location-review-section{
