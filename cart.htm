@@ -1,0 +1,672 @@
+
+# Shoppers' Mart — Cart Page
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cart | Shoppers' Mart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#fffdf7;
+      color:#222;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      width:450px;
+      height:450px;
+      background:#ffe1a8;
+      border-radius:50%;
+      top:-150px;
+      left:-150px;
+      filter:blur(120px);
+      opacity:.6;
+      z-index:-1;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:450px;
+      height:450px;
+      background:#d9ffb8;
+      border-radius:50%;
+      bottom:-150px;
+      right:-150px;
+      filter:blur(120px);
+      opacity:.6;
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+
+    .navbar{
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:92%;
+      max-width:1400px;
+      padding:18px 40px;
+      background:rgba(255,255,255,0.75);
+      backdrop-filter:blur(20px);
+      border-radius:30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      z-index:1000;
+      box-shadow:0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    .logo h1{
+      font-size:38px;
+      font-weight:900;
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .logo p{
+      font-size:12px;
+      letter-spacing:4px;
+      color:#777;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#333;
+      font-weight:600;
+      transition:.3s;
+    }
+
+    .nav-links a:hover{
+      color:#ff7b00;
+    }
+
+    .cart-btn{
+      border:none;
+      padding:14px 24px;
+      border-radius:18px;
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      color:white;
+      font-weight:700;
+      box-shadow:0 15px 30px rgba(255,123,0,0.2);
+      cursor:pointer;
+    }
+
+    /* HERO */
+
+    .cart-hero{
+      padding:190px 8% 70px;
+      text-align:center;
+    }
+
+    .cart-tag{
+      background:white;
+      padding:14px 24px;
+      border-radius:50px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      color:#ff7b00;
+      font-weight:700;
+    }
+
+    .cart-hero h1{
+      margin-top:35px;
+      font-size:80px;
+      font-weight:900;
+      line-height:1;
+    }
+
+    .cart-hero h1 span{
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .cart-hero p{
+      max-width:800px;
+      margin:30px auto 0;
+      color:#666;
+      line-height:1.9;
+      font-size:18px;
+    }
+
+    /* MAIN */
+
+    .cart-wrapper{
+      padding:0 8% 120px;
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:40px;
+      align-items:start;
+    }
+
+    /* CART ITEMS */
+
+    .cart-items{
+      display:flex;
+      flex-direction:column;
+      gap:30px;
+    }
+
+    .cart-card{
+      background:rgba(255,255,255,0.75);
+      backdrop-filter:blur(18px);
+      border-radius:35px;
+      padding:25px;
+      display:flex;
+      align-items:center;
+      gap:25px;
+      box-shadow:0 20px 45px rgba(0,0,0,0.08);
+      transition:.35s;
+    }
+
+    .cart-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .cart-card img{
+      width:150px;
+      height:150px;
+      object-fit:cover;
+      border-radius:28px;
+    }
+
+    .cart-details{
+      flex:1;
+    }
+
+    .cart-details h2{
+      font-size:30px;
+      margin-bottom:10px;
+    }
+
+    .cart-category{
+      display:inline-block;
+      margin-bottom:14px;
+      padding:10px 18px;
+      border-radius:50px;
+      background:rgba(255,123,0,0.12);
+      color:#ff7b00;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .cart-details p{
+      color:#666;
+      line-height:1.8;
+      margin-bottom:18px;
+    }
+
+    .price{
+      font-size:24px;
+      font-weight:800;
+      color:#ff7b00;
+    }
+
+    .quantity-box{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-top:20px;
+    }
+
+    .quantity-btn{
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:14px;
+      background:#f2f2f2;
+      font-size:22px;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .quantity-btn:hover{
+      background:#ff7b00;
+      color:white;
+    }
+
+    .quantity-number{
+      font-size:20px;
+      font-weight:700;
+    }
+
+    .remove-btn{
+      border:none;
+      background:#fff1f1;
+      color:#ff4b4b;
+      padding:14px 20px;
+      border-radius:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .remove-btn:hover{
+      background:#ff4b4b;
+      color:white;
+    }
+
+    /* SUMMARY */
+
+    .summary-box{
+      position:sticky;
+      top:120px;
+      background:rgba(255,255,255,0.78);
+      backdrop-filter:blur(18px);
+      border-radius:35px;
+      padding:35px;
+      box-shadow:0 20px 45px rgba(0,0,0,0.08);
+    }
+
+    .summary-box h2{
+      font-size:36px;
+      margin-bottom:30px;
+    }
+
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:20px;
+      color:#555;
+      font-size:17px;
+    }
+
+    .summary-total{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:25px;
+      padding-top:25px;
+      border-top:1px solid rgba(0,0,0,0.08);
+    }
+
+    .summary-total h3{
+      font-size:20px;
+    }
+
+    .summary-total span{
+      font-size:30px;
+      font-weight:900;
+      color:#ff7b00;
+    }
+
+    .checkout-btn{
+      width:100%;
+      margin-top:30px;
+      border:none;
+      padding:20px;
+      border-radius:22px;
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      color:white;
+      font-size:17px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.35s;
+      box-shadow:0 18px 35px rgba(255,123,0,0.2);
+    }
+
+    .checkout-btn:hover{
+      transform:translateY(-5px);
+    }
+
+    /* FOOTER */
+
+    .footer{
+      background:#000;
+      color:white;
+      padding:70px 8% 25px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .footer-content{
+      position:relative;
+      z-index:2;
+      text-align:center;
+    }
+
+    .footer-content h2{
+      font-size:42px;
+      font-weight:900;
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .footer-content p{
+      margin:20px auto 35px;
+      max-width:700px;
+      color:#bdbdbd;
+      line-height:1.9;
+    }
+
+    .footer-bottom{
+      margin-top:40px;
+      border-top:1px solid rgba(255,255,255,0.1);
+      padding-top:20px;
+      text-align:center;
+      color:#999;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:950px){
+
+      .cart-wrapper{
+        grid-template-columns:1fr;
+      }
+
+      .summary-box{
+        position:relative;
+        top:0;
+      }
+
+    }
+
+    @media(max-width:768px){
+
+      .navbar{
+        padding:18px 24px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .cart-hero h1{
+        font-size:55px;
+      }
+
+      .cart-card{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .cart-card img{
+        width:100%;
+        height:240px;
+      }
+
+      .quantity-box{
+        justify-content:center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <div class="logo">
+      <h1>Shoppers' Mart</h1>
+      <p>YOUR CART</p>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.htm">Home</a></li>
+      <li><a href="about.htm">About</a></li>
+      <li><a href="pro.htm">Products</a></li>
+      <li><a href="#">Offers</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="contact.htm">Contact</a></li>
+    </ul>
+
+    <button class="cart-btn">
+      3 Items 🛒
+    </button>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="cart-hero">
+
+    <span class="cart-tag">
+      🛒 SHOPPING CART
+    </span>
+
+    <h1>
+      Ready To <br>
+      <span>Checkout?</span>
+    </h1>
+
+    <p>
+      Review your selected products before proceeding to secure checkout.
+      Fresh essentials, premium care and beauty collections — all in one cart.
+    </p>
+
+  </section>
+
+  <!-- MAIN -->
+
+  <section class="cart-wrapper">
+
+    <!-- LEFT -->
+
+    <div class="cart-items">
+
+      <!-- ITEM 1 -->
+
+      <div class="cart-card">
+
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="cart-details">
+
+          <h2>Fresh Grocery Pack</h2>
+
+          <div class="cart-category">
+            Groceries 🥬
+          </div>
+
+          <p>
+            Farm fresh vegetables, fruits and premium daily essentials.
+          </p>
+
+          <div class="price">
+            ₹1,299
+          </div>
+
+          <div class="quantity-box">
+            <button class="quantity-btn">−</button>
+            <span class="quantity-number">1</span>
+            <button class="quantity-btn">+</button>
+          </div>
+
+        </div>
+
+        <button class="remove-btn">
+          Remove
+        </button>
+
+      </div>
+
+      <!-- ITEM 2 -->
+
+      <div class="cart-card">
+
+        <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="cart-details">
+
+          <h2>Personal Care Combo</h2>
+
+          <div class="cart-category">
+            Personal Care ✨
+          </div>
+
+          <p>
+            Skincare, hygiene and wellness essentials for daily care.
+          </p>
+
+          <div class="price">
+            ₹899
+          </div>
+
+          <div class="quantity-box">
+            <button class="quantity-btn">−</button>
+            <span class="quantity-number">2</span>
+            <button class="quantity-btn">+</button>
+          </div>
+
+        </div>
+
+        <button class="remove-btn">
+          Remove
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="summary-box">
+
+      <h2>Order Summary</h2>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>₹3,097</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Delivery</span>
+        <span>₹99</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Discount</span>
+        <span>− ₹200</span>
+      </div>
+
+      <div class="summary-total">
+        <h3>Total</h3>
+        <span>₹2,996</span>
+      </div>
+
+      <button class="checkout-btn">
+        Proceed To Checkout 🚀
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="footer-content">
+
+      <h2>Shoppers' Mart</h2>
+
+      <p>
+        Fresh groceries, cosmetics, bakery products and premium essentials — all in one destination.
+      </p>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Shoppers' Mart. All Rights Reserved. Designed by Michelle Phillips.
+    </div>
+
+  </footer>
+
+  <script>
+
+    // QUANTITY BUTTONS
+
+    const minusButtons = document.querySelectorAll('.quantity-btn:first-child');
+    const plusButtons = document.querySelectorAll('.quantity-btn:last-child');
+
+    minusButtons.forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        const quantityElement =
+        button.parentElement.querySelector('.quantity-number');
+
+        let quantity = parseInt(quantityElement.innerText);
+
+        if(quantity > 1){
+
+          quantity--;
+          quantityElement.innerText = quantity;
+
+        }
+
+      });
+
+    });
+
+    plusButtons.forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        const quantityElement =
+        button.parentElement.querySelector('.quantity-number');
+
+        let quantity = parseInt(quantityElement.innerText);
+
+        quantity++;
+
+        quantityElement.innerText = quantity;
+
+      });
+
+    });
+
+    // REMOVE PRODUCT
+
+    const removeButtons = document.querySelectorAll('.remove-btn');
+
+    removeButtons.forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        button.parentElement.remove();
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
+```

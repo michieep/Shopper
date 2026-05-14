@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shoppers' Mart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#fffdf7;
+      overflow-x:hidden;
+      color:#222;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:#ffd89b;
+      border-radius:50%;
+      top:-120px;
+      left:-100px;
+      filter:blur(120px);
+      opacity:.6;
+      z-index:-1;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:#d4ffb2;
+      border-radius:50%;
+      bottom:-200px;
+      right:-100px;
+      filter:blur(120px);
+      opacity:.6;
+      z-index:-1;
+    }
+
+    .navbar{
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:92%;
+      max-width:1400px;
+      padding:18px 40px;
+      background:rgba(255,255,255,0.7);
+      backdrop-filter:blur(20px);
+      border-radius:30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      z-index:1000;
+      box-shadow:0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    .logo h1{
+      font-size:40px;
+      font-weight:900;
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .logo p{
+      font-size:12px;
+      letter-spacing:4px;
+      color:#777;
+      margin-top:-5px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#333;
+      font-weight:600;
+      transition:.3s;
+    }
+
+    .nav-links a:hover{
+      color:#ff7b00;
+      transform:translateY(-2px);
+    }
+
+    .nav-buttons{
+      display:flex;
+      gap:15px;
+    }
+
+    .cart-btn,
+    .shop-btn{
+      border:none;
+      padding:14px 24px;
+      border-radius:18px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .cart-btn{
+      background:white;
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .shop-btn{
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      color:white;
+      box-shadow:0 12px 30px rgba(255,123,0,0.3);
+    }
+
+    .cart-btn:hover,
+    .shop-btn:hover{
+      transform:translateY(-4px) scale(1.03);
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:170px 8% 100px;
+      gap:60px;
+    }
+
+    .hero-left{
+      flex:1;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:white;
+      padding:14px 24px;
+      border-radius:50px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      font-weight:600;
+      margin-bottom:30px;
+    }
+
+    .hero-left h1{
+      font-size:95px;
+      line-height:0.95;
+      font-weight:900;
+    }
+
+    .gradient-text{
+      background:linear-gradient(to right,#ff7b00,#ffd000,#73c000);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-left p{
+      margin-top:35px;
+      font-size:20px;
+      line-height:1.8;
+      color:#666;
+      max-width:700px;
+    }
+
+    .hero-buttons{
+      margin-top:40px;
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .hero-buttons button{
+      padding:18px 34px;
+      border:none;
+      border-radius:22px;
+      font-size:17px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .explore-btn{
+      background:black;
+      color:white;
+      box-shadow:0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .offer-btn{
+      background:white;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .hero-buttons button:hover{
+      transform:translateY(-5px) scale(1.03);
+    }
+
+    .stats{
+      margin-top:50px;
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .stat-card{
+      background:rgba(255,255,255,0.75);
+      backdrop-filter:blur(15px);
+      padding:28px;
+      border-radius:28px;
+      min-width:180px;
+      box-shadow:0 15px 30px rgba(0,0,0,0.08);
+      transition:.3s;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .stat-card h2{
+      font-size:42px;
+      color:#ff7b00;
+      font-weight:900;
+    }
+
+    .stat-card p{
+      margin-top:8px;
+      color:#666;
+      font-size:15px;
+    }
+
+    .hero-right{
+      flex:1;
+      position:relative;
+      display:flex;
+      justify-content:center;
+    }
+
+    .main-image-card{
+      position:relative;
+      width:100%;
+      max-width:600px;
+      background:linear-gradient(to bottom right,#fff2dd,#f3ffe0);
+      padding:25px;
+      border-radius:45px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.12);
+      overflow:hidden;
+    }
+
+    .main-image-card img{
+      width:100%;
+      height:650px;
+      object-fit:cover;
+      border-radius:35px;
+    }
+
+    .floating-badge{
+      position:absolute;
+      top:25px;
+      right:25px;
+      background:black;
+      color:white;
+      padding:14px 24px;
+      border-radius:50px;
+      font-weight:700;
+      animation:pulse 2s infinite;
+    }
+
+    .product-card{
+      position:absolute;
+      bottom:30px;
+      left:30px;
+      background:rgba(255,255,255,0.9);
+      backdrop-filter:blur(15px);
+      padding:18px;
+      border-radius:28px;
+      width:260px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.12);
+      transition:.3s;
+    }
+
+    .product-card:hover{
+      transform:scale(1.05);
+    }
+
+    .product-top{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .emoji-box{
+      width:65px;
+      height:65px;
+      background:#fff1d6;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+    }
+
+    .product-info h3{
+      font-size:22px;
+    }
+
+    .product-info p{
+      color:#777;
+      font-size:14px;
+    }
+
+    .price{
+      margin-top:4px;
+      color:#ff7b00 !important;
+      font-weight:800;
+    }
+
+    .floating-left,
+    .floating-right{
+      position:absolute;
+      padding:18px 24px;
+      border-radius:25px;
+      font-weight:700;
+      box-shadow:0 15px 40px rgba(0,0,0,0.12);
+      animation:float 4s ease-in-out infinite;
+    }
+
+    .floating-left{
+      left:-40px;
+      top:90px;
+      background:white;
+      transform:rotate(-8deg);
+    }
+
+    .floating-right{
+      right:-30px;
+      bottom:80px;
+      background:#73c000;
+      color:white;
+      transform:rotate(8deg);
+    }
+
+    .bottom-strip{
+      padding:0 8% 80px;
+    }
+
+    .strip-box{
+      background:black;
+      color:white;
+      border-radius:35px;
+      padding:35px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:35px;
+      font-weight:600;
+      font-size:18px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.05);}
+      100%{transform:scale(1);}
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-12px);}
+      100%{transform:translateY(0px);}
+    }
+
+    @media(max-width:1100px){
+      .hero{
+        flex-direction:column;
+        padding-top:180px;
+      }
+
+      .hero-left h1{
+        font-size:70px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+    }
+
+    @media(max-width:768px){
+      .navbar{
+        padding:16px 20px;
+      }
+
+      .logo h1{
+        font-size:28px;
+      }
+
+      .hero-left h1{
+        font-size:52px;
+      }
+
+      .hero-left p{
+        font-size:16px;
+      }
+
+      .main-image-card img{
+        height:450px;
+      }
+
+      .floating-left,
+      .floating-right{
+        display:none;
+      }
+
+      .product-card{
+        width:220px;
+      }
+
+      .cart-btn{
+        display:none;
+      }
+    }
+    /* MAP + REVIEW SECTION */
+
+.location-review-section{
+  padding:120px 8%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+/* LEFT SIDE */
+
+.review-side{
+  position:relative;
+}
+
+.mini-tag{
+  background:white;
+  padding:14px 24px;
+  border-radius:50px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  color:#73c000;
+  font-weight:700;
+}
+
+.review-side h2{
+  margin-top:30px;
+  font-size:70px;
+  line-height:1;
+  font-weight:900;
+}
+
+.review-side h2 span{
+  background:linear-gradient(to right,#ff7b00,#73c000);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.review-side p{
+  margin-top:25px;
+  font-size:18px;
+  line-height:1.9;
+  color:#666;
+}
+
+/* REVIEW CARDS */
+
+.review-card{
+  margin-top:30px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(15px);
+  padding:30px;
+  border-radius:35px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.08);
+  transition:.3s;
+}
+
+.review-card:hover{
+  transform:translateY(-10px);
+}
+
+.review-top{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.review-user{
+  width:70px;
+  height:70px;
+  background:#fff1d6;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+}
+
+.review-top h3{
+  font-size:22px;
+}
+
+.review-top p{
+  margin-top:4px;
+  font-size:14px;
+}
+
+.stars{
+  margin-top:20px;
+  font-size:22px;
+}
+
+.review-text{
+  margin-top:18px;
+  line-height:1.8;
+}
+
+/* RATING BOX */
+
+.rating-box{
+  margin-top:35px;
+  background:black;
+  color:white;
+  padding:35px;
+  border-radius:35px;
+  text-align:center;
+  box-shadow:0 20px 45px rgba(0,0,0,0.15);
+}
+
+.rating-box h1{
+  font-size:70px;
+  font-weight:900;
+}
+
+.rating-box p{
+  color:#ddd;
+  margin-top:10px;
+}
+
+/* RIGHT SIDE MAP */
+
+.map-container{
+  position:relative;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(15px);
+  padding:25px;
+  border-radius:45px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.1);
+}
+
+.map-top{
+  margin-bottom:25px;
+}
+
+.map-top h2{
+  font-size:42px;
+  font-weight:900;
+}
+
+.map-top p{
+  margin-top:10px;
+  color:#666;
+  font-size:17px;
+}
+
+.map-container iframe{
+  width:100%;
+  height:650px;
+  border:none;
+  border-radius:35px;
+}
+
+/* FLOATING MAP CARD */
+
+.map-floating-card{
+  position:absolute;
+  left:40px;
+  bottom:40px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(15px);
+  padding:28px;
+  border-radius:30px;
+  width:320px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.12);
+}
+
+.map-floating-card h3{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.map-floating-card p{
+  color:#666;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+.map-floating-card button{
+  border:none;
+  padding:15px 24px;
+  border-radius:18px;
+  background:linear-gradient(to right,#ff7b00,#73c000);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.map-floating-card button:hover{
+  transform:translateY(-5px) scale(1.03);
+}
+.footer{
+  background:#000;
+  color:white;
+  padding:70px 8% 25px;
+  margin-top:120px;
+  position:relative;
+  overflow:hidden;
+}
+
+.footer::before{
+  content:'';
+  position:absolute;
+  width:350px;
+  height:350px;
+  background:rgba(255,123,0,0.12);
+  border-radius:50%;
+  top:-120px;
+  left:-100px;
+  filter:blur(100px);
+}
+
+.footer::after{
+  content:'';
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:rgba(115,192,0,0.12);
+  border-radius:50%;
+  bottom:-120px;
+  right:-100px;
+  filter:blur(100px);
+}
+
+.footer-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.footer-content h2{
+  font-size:42px;
+  font-weight:900;
+  background:linear-gradient(to right,#ff7b00,#73c000);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.footer-content p{
+  margin:20px auto 35px;
+  max-width:700px;
+  color:#bdbdbd;
+  line-height:1.9;
+  font-size:16px;
+}
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+}
+
+.footer-links a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  position:relative;
+  transition:.3s;
+}
+
+.footer-links a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0%;
+  height:2px;
+  background:linear-gradient(to right,#ff7b00,#73c000);
+  transition:.3s;
+}
+
+.footer-links a:hover{
+  color:#ffb347;
+}
+
+.footer-links a:hover::after{
+  width:100%;
+}
+
+.footer-bottom{
+  position:relative;
+  z-index:2;
+  margin-top:50px;
+  padding-top:25px;
+  border-top:1px solid rgba(255,255,255,0.12);
+  text-align:center;
+  color:#9f9f9f;
+  font-size:15px;
+  line-height:1.8;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:950px){
+
+  .location-review-section{
+    grid-template-columns:1fr;
+  }
+
+  .review-side h2{
+    font-size:50px;
+  }
+
+  .map-container iframe{
+    height:450px;
+  }
+
+  .map-floating-card{
+    position:relative;
+    width:100%;
+    left:0;
+    bottom:0;
+    margin-top:25px;
+  }
+  .explore-btn{
+      border:none;
+      padding:18px 28px;
+      border-radius:20px;
+      background:linear-gradient(to right,#ff7b00,#73c000);
+      color:white;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.35s;
+      box-shadow:0 18px 35px rgba(255,123,0,0.2);
+    }
+
+    .explore-btn:hover{
+      transform:translateY(-6px) scale(1.03);
+    }
+
+}
+@media(max-width:768px){
+
+  .footer{
+    padding:60px 6% 25px;
+  }
+
+  .footer-content h2{
+    font-size:32px;
+  }
+
+  .footer-content p{
+    font-size:14px;
+  }
+
+  .footer-links{
+    gap:18px;
+  }
+
+  .footer-bottom{
+    font-size:13px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <h1>Shoppers' Mart</h1>
+      <p>FRESH • DAILY • PREMIUM</p>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.htm">Home</a></li>
+      <li><a href="about.htm">About</a></li>
+      <li><a href="pro.htm">Products</a></li>
+      <li><a href="#">Offers</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="products.htm">Contact</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+      <a href="cart.htm"><button class="cart-btn">🛒 Cart</button></a
+      <button class="shop-btn">Shop Now ✨</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+
+    <div class="hero-left">
+
+      <div class="tag">
+        🥬 Eastern UP's First Premium Supermarket
+      </div>
+
+      <h1>
+        Grocery,<br>
+        <span class="gradient-text">But Make It</span><br>
+        Beautiful.
+      </h1>
+
+      <p>
+        Fresh groceries, frozen foods, cosmetics, bakery products, daily essentials, and exciting offers — all curated in a modern shopping experience.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="explore-btn">Explore Products</button>
+        <button class="offer-btn">View Offers 🔥</button>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat-card">
+          <h2>12K+</h2>
+          <p>Happy Shoppers</p>
+        </div>
+
+        <div class="stat-card">
+          <h2>Fresh</h2>
+          <p>Daily Essentials</p>
+        </div>
+
+        <div class="stat-card">
+          <h2>Offers</h2>
+          <p>Every Week</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="hero-right">
+
+      <div class="floating-left">
+        🛍️ Premium Quality
+      </div>
+
+      <div class="floating-right">
+        Best Weekly Offers 🔥
+      </div>
+
+      <div class="main-image-card">
+
+        <div class="floating-badge">
+          Fresh Everyday ✨
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1400&auto=format&fit=crop" alt="Grocery Store">
+
+        <div class="product-card">
+          <div class="product-top">
+
+            <div class="emoji-box">
+              🍊
+            </div>
+
+            <div class="product-info">
+              <h3>Fresh Orange</h3>
+              <p>Organic Fruits</p>
+              <p class="price">₹120/kg</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="bottom-strip">
+    <div class="strip-box">
+      <span>🥖 Bakery Products</span>
+      <span>🧊 Frozen Foods</span>
+      <span>🧴 Cosmetics</span>
+      <span>🥬 Fresh Vegetables</span>
+      <span>🛒 Daily Essentials</span>
+      <span>🔥 Exciting Discounts</span>
+    </div>
+  </section>
+  <!-- MAP + REVIEW SECTION -->
+
+<section class="location-review-section">
+
+  <!-- LEFT SIDE -->
+
+  <div class="review-side">
+
+    <span class="mini-tag">
+      ⭐ CUSTOMER REVIEWS
+    </span>
+
+    <h2>
+      Loved By <span>Thousands</span>
+    </h2>
+
+    <p>
+      Trusted by customers across Varanasi for quality products,
+      exciting offers, premium shopping experience,
+      and daily essentials.
+    </p>
+
+    <!-- REVIEW CARD 1 -->
+
+    <div class="review-card">
+
+      <div class="review-top">
+
+        <div class="review-user">
+          👩
+        </div>
+
+        <div>
+          <h3>Priya Sharma</h3>
+          <p>Verified Customer</p>
+        </div>
+
+      </div>
+
+      <div class="stars">
+        ⭐⭐⭐⭐⭐
+      </div>
+
+      <p class="review-text">
+        “Amazing supermarket with fresh products,
+        excellent offers, and beautiful shopping experience.”
+      </p>
+
+    </div>
+
+    <!-- REVIEW CARD 2 -->
+
+    <div class="review-card">
+
+      <div class="review-top">
+
+        <div class="review-user">
+          👨
+        </div>
+
+        <div>
+          <h3>Rahul Verma</h3>
+          <p>Regular Customer</p>
+        </div>
+
+      </div>
+
+      <div class="stars">
+        ⭐⭐⭐⭐⭐
+      </div>
+
+      <p class="review-text">
+        “One of the best departmental stores in Varanasi.
+        Clean environment and premium quality products.”
+      </p>
+
+    </div>
+
+    <!-- RATING BOX -->
+
+    <div class="rating-box">
+
+      <h1>4.9 ⭐</h1>
+
+      <p>
+        Based on 12K+ happy customers
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+
+  <div class="map-side">
+
+    <div class="map-container">
+
+      <div class="map-top">
+
+        <h2>
+          📍 Visit Our Store
+        </h2>
+
+        <p>
+          Sigra, Mahmoorganj Road, Varanasi
+        </p>
+
+      </div>
+
+      <!-- GOOGLE MAP -->
+
+      <iframe
+        src="https://www.google.com/maps?q=Sigra,Mahmoorganj%20Road,Varanasi&output=embed"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+
+      <div class="map-floating-card">
+
+        <h3>Shoppers' Mart</h3>
+
+        <p>
+          Premium supermarket with groceries,
+          cosmetics, frozen foods, bakery,
+          and daily essentials.
+        </p>
+
+        <button>
+          Get Directions →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+ <footer class="footer">
+
+  <div class="footer-content">
+
+    <h2>Shoppers' Mart</h2>
+
+    <p>
+      Fresh groceries, bakery products, cosmetics, frozen foods,
+      and daily essentials — all in one premium shopping destination.
+    </p>
+
+    <div class="footer-links">
+      <a href="index.htm">Home</a>
+      <a href="about.htm">About</a>
+      <a href="pro.htm">Products</a>
+      <a href="#">Offers</a>
+      <a href="#">Gallery</a>
+      <a href="products.htm">Contact</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Shoppers' Mart. All Rights Reserved. Designed by Michelle Phillips.
+  </div>
+
+</footer>
+
+  <script>
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50){
+        navbar.style.padding = '14px 40px';
+        navbar.style.background = 'rgba(255,255,255,0.88)';
+      }
+      else{
+        navbar.style.padding = '18px 40px';
+        navbar.style.background = 'rgba(255,255,255,0.7)';
+      }
+    })
+  </script>
+  <script>
+
+    console.log("Products Page Loaded Successfully 🚀");
+
+  </script>
+
+</body>
+</html>
