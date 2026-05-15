@@ -379,7 +379,195 @@
       font-weight:800;
       margin-top:4px;
     }
+    .location-review-section{
+  padding:120px 8%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
 
+/* LEFT SIDE */
+
+.review-side{
+  position:relative;
+}
+
+.mini-tag{
+  background:white;
+  padding:14px 24px;
+  border-radius:50px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  color:#73c000;
+  font-weight:700;
+}
+
+.review-side h2{
+  margin-top:30px;
+  font-size:70px;
+  line-height:1;
+  font-weight:900;
+}
+
+.review-side h2 span{
+  background:linear-gradient(to right,#ff7b00,#73c000);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.review-side p{
+  margin-top:25px;
+  font-size:18px;
+  line-height:1.9;
+  color:#666;
+}
+
+/* REVIEW CARDS */
+
+.review-card{
+  margin-top:30px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(15px);
+  padding:30px;
+  border-radius:35px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.08);
+  transition:.3s;
+}
+
+.review-card:hover{
+  transform:translateY(-10px);
+}
+
+.review-top{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.review-user{
+  width:70px;
+  height:70px;
+  background:#fff1d6;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+}
+
+.review-top h3{
+  font-size:22px;
+}
+
+.review-top p{
+  margin-top:4px;
+  font-size:14px;
+}
+
+.stars{
+  margin-top:20px;
+  font-size:22px;
+}
+
+.review-text{
+  margin-top:18px;
+  line-height:1.8;
+}
+
+/* RATING BOX */
+
+.rating-box{
+  margin-top:35px;
+  background:black;
+  color:white;
+  padding:35px;
+  border-radius:35px;
+  text-align:center;
+  box-shadow:0 20px 45px rgba(0,0,0,0.15);
+}
+
+.rating-box h1{
+  font-size:70px;
+  font-weight:900;
+}
+
+.rating-box p{
+  color:#ddd;
+  margin-top:10px;
+}
+
+/* RIGHT SIDE MAP */
+
+.map-container{
+  position:relative;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(15px);
+  padding:25px;
+  border-radius:45px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.1);
+}
+
+.map-top{
+  margin-bottom:25px;
+}
+
+.map-top h2{
+  font-size:42px;
+  font-weight:900;
+}
+
+.map-top p{
+  margin-top:10px;
+  color:#666;
+  font-size:17px;
+}
+
+.map-container iframe{
+  width:100%;
+  height:650px;
+  border:none;
+  border-radius:35px;
+}
+
+/* FLOATING MAP CARD */
+
+.map-floating-card{
+  position:absolute;
+  left:40px;
+  bottom:40px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(15px);
+  padding:28px;
+  border-radius:30px;
+  width:320px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.12);
+}
+
+.map-floating-card h3{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.map-floating-card p{
+  color:#666;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+.map-floating-card button{
+  border:none;
+  padding:15px 24px;
+  border-radius:18px;
+  background:linear-gradient(to right,#ff7b00,#73c000);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.map-floating-card button:hover{
+  transform:translateY(-5px) scale(1.03);
+}
     /* FLOATING TAGS */
 
     .floating-left,
@@ -433,6 +621,143 @@
 
       box-shadow:0 20px 50px rgba(0,0,0,0.15);
     }
+    <section class="location-review-section">
+
+  <!-- LEFT SIDE -->
+
+  <div class="review-side">
+
+    <span class="mini-tag">
+      ⭐ CUSTOMER REVIEWS
+    </span>
+
+    <h2>
+      Loved By <span>Thousands</span>
+    </h2>
+
+    <p>
+      Trusted by customers across Varanasi for quality products,
+      exciting offers, premium shopping experience,
+      and daily essentials.
+    </p>
+
+    <!-- REVIEW CARDS -->
+
+    <div class="review-card">
+
+      <div class="review-top">
+
+        <div class="review-user">
+          👩
+        </div>
+
+        <div>
+          <h3>Priya Sharma</h3>
+          <p>Verified Customer</p>
+        </div>
+
+      </div>
+
+      <div class="stars">
+        ⭐⭐⭐⭐⭐
+      </div>
+
+      <p class="review-text">
+        “Amazing supermarket with fresh products,
+        excellent offers, and beautiful shopping experience.”
+      </p>
+
+    </div>
+
+    <div class="review-card">
+
+      <div class="review-top">
+
+        <div class="review-user">
+          👨
+        </div>
+
+        <div>
+          <h3>Rahul Verma</h3>
+          <p>Regular Customer</p>
+        </div>
+
+      </div>
+
+      <div class="stars">
+        ⭐⭐⭐⭐⭐
+      </div>
+
+      <p class="review-text">
+        “One of the best departmental stores in Varanasi.
+        Clean environment and premium quality products.”
+      </p>
+
+    </div>
+
+    <!-- RATING FLOAT -->
+
+    <div class="rating-box">
+
+      <h1>4.9 ⭐</h1>
+
+      <p>
+        Based on 12K+ happy customers
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+
+  <div class="map-side">
+
+    <div class="map-container">
+
+      <div class="map-top">
+
+        <h2>
+          📍 Visit Our Store
+        </h2>
+
+        <p>
+          Sigra, Mahmoorganj Road, Varanasi
+        </p>
+
+      </div>
+
+      <!-- GOOGLE MAP -->
+
+      <iframe
+        src="https://www.google.com/maps?q=Sigra,Mahmoorganj%20Road,Varanasi&output=embed"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+
+      <!-- FLOATING INFO -->
+
+      <div class="map-floating-card">
+
+        <h3>Shoppers' Mart</h3>
+
+        <p>
+          Premium supermarket with groceries,
+          cosmetics, frozen foods, bakery,
+          and daily essentials.
+        </p>
+
+        <button>
+          Get Directions →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
     /* FOOTER */
 
@@ -509,7 +834,25 @@
       .nav-links{
         justify-content:center;
       }
+      .location-review-section{
+    grid-template-columns:1fr;
+  }
 
+  .review-side h2{
+    font-size:50px;
+  }
+
+  .map-container iframe{
+    height:450px;
+  }
+
+  .map-floating-card{
+    position:relative;
+    width:100%;
+    left:0;
+    bottom:0;
+    margin-top:25px;
+  }
     }
 
     @media(max-width:768px){
